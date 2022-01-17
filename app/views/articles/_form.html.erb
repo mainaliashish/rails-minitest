@@ -1,0 +1,17 @@
+<%= render 'shared/errors', obj: @article %>
+
+<%= form_with model: @article, path: articles_path do |form| %>
+  <div>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %>
+  </div>
+
+  <div>
+    <%= form.submit data: { turbo: false }%>
+  </div>
+<% end %>
