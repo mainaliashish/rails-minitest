@@ -1,2 +1,14 @@
-<h1>Pages#index</h1>
-<p>Find me in app/views/pages/index.html.erb</p>
+<h2>List All Articles.</h2>
+
+<% if @articles.count >= 1 %>
+  <% @articles.each do |article| %>
+    <h4>Title : </h4> 
+    <p><%= article.title %></p>
+    <h4>Content : </h4>
+    <p><%= article.body %></p>
+  <% end %>
+<% else %>
+  <h3>No articles found.</h3>
+<% end %>
+
+
