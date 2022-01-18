@@ -76,5 +76,7 @@ end
 gem "pry", group: :development
 gem "bcrypt"
 
+gem 'cssbundling-rails'
+
 
 
