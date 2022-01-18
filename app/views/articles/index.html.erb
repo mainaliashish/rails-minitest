@@ -30,7 +30,7 @@
       <th scope="row"><%= index + 1 %></th>
       <td><%= article.title %></td>
       <td><%= article.body %></td>
-      <td><%= article.user.first_name %></td>
+      <td><%= article.user ? article.user.first_name : ''%></td>
       <td>
         <%= link_to "Show", article_path(article) %>
         <%= link_to "Edit", edit_article_path(article) %>

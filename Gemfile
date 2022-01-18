@@ -57,6 +57,7 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
   gem "byebug"
+  gem 'better_errors', '~> 2.9', '>= 2.9.1'
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 
@@ -71,7 +72,9 @@ group :test do
   gem "webdrivers"
 end
 
+# Added by user
 gem "pry", group: :development
 gem "bcrypt"
+
 
 

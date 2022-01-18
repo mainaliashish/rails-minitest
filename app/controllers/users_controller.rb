@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :require_admin, only: %i[ edit update destroy ]
 
   def index
     @users = User.all
@@ -12,9 +13,7 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def edit
-  end
-
+  
   def create
     @user = User.new(user_params)
     if @user.save
@@ -24,6 +23,9 @@ class UsersController < ApplicationController
     else
       render :new
     end
+  end
+  
+  def edit
   end
 
   def update
@@ -46,6 +48,13 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :first_name, :last_name, :password)
+    params.require(:user).permit(:email, :first_name, :last_name, :username, :password)
+  end
+
+  def require_admin
+    if @user.role != 'admin'
+      flash[:notice] = "Only admin can perform this action."
+      redirect_to root_path
+    end
   end
 end
