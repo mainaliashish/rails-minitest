@@ -62,7 +62,7 @@ class UsersController < ApplicationController
   end
 
   def require_same_user
-    if @user != current_user
+    if @user != current_user and !current_user.admin?
       flash[:notice] = "You can only update your own profile."
       redirect_to users_path
     end
