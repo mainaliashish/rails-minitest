@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
-  before_action :require_admin, only: %i[ edit update destroy ]
+  before_action :require_admin, only: :destroy
+  before_action :require_same_user, only: %i[ edit update]
 
   def index
     @users = User.all
@@ -19,7 +20,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       flash[:notice] = "Welcome to blog #{@user.first_name}"
-      redirect_to user_path(@user)
+      redirect_to articles_path
     else
       render :new
     end
@@ -39,6 +40,8 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy
+    flash[:notice] = "User has been deleted successfully."
+    redirect_to users_path
   end
 
   private
@@ -52,9 +55,16 @@ class UsersController < ApplicationController
   end
 
   def require_admin
-    if @user.role != 'admin'
+    if @user.admin?
       flash[:notice] = "Only admin can perform this action."
-      redirect_to root_path
+      redirect_to users_path
+    end
+  end
+
+  def require_same_user
+    if @user != current_user
+      flash[:notice] = "You can only update your own profile."
+      redirect_to users_path
     end
   end
 end
