@@ -1,11 +1,11 @@
 <%= render @user %>
 
-<div>
+<div class="container">
   <% if @user.id == session["user_id"] %>
     <%= link_to "Edit this user", edit_user_path(@user) %> |  
   <% end %>
   <%= link_to "Back to users", users_path %>
-  <% if current_user.admin? %>
-    <%= button_to "Destroy this user", @user, method: :delete %>
+  <% if logged_in? and current_user.admin? %>
+    <%= button_to "Destroy this user", @user, method: :delete, class: "btn btn-danger btn-sm"%>
   <% end %>
 </div>

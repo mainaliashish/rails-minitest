@@ -1,19 +1,23 @@
 <%= render 'shared/errors', obj: @article %>
 
-<%= form_with model: @article, path: articles_path do |form| %>
-  <div>
-    <%= form.label :title %><br>
-    <%= form.text_field :title %>
-  </div>
+<div class="container mt-5 p-3">
+  <h4><%= title %></h4>
+</div>
 
-  <div>
-    <%= form.label :body %><br>
-    <%= form.text_area :body %>
-  </div>
+<div class="container">
+    <%= form_with(model: @article, :html => {class: "form-horizontal", role: "form"}) do |f| %>
+    <div class="form-group mb-3">
+        <%= f.text_field :title, class: "form-control", placeholder: "insert title", autofocus: true %>
+    </div>
+    <div class="form-group mb-3">
+        <%= f.text_area :body, class: "form-control", placeholder: "insert body", autofocus: true, rows: 7 %>
+    </div>
 
-  <div>
-    <%= form.submit data: { turbo: false }%>
-  </div>
-<% end %>
-
-<%= link_to "Go Back", articles_path %>
+    <div class="form-group mb-3">
+        <%= f.submit data: { turbo: false },  class: "btn btn-primary btn-sm" %>
+    </div>
+    <% end %>
+    <div class="col-xs-4 col-xs-offset-4">
+        [<%= link_to "Cancel Request and Go Back", articles_path %>]
+    </div>
+</div>

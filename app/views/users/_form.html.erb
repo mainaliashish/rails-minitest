@@ -1,36 +1,38 @@
-
 <%= render 'shared/errors', obj: @user %>
 
-<%= form_with(model: user) do |form| %>
+<div class="container">
+    <%= form_with(model: @user, :html => {class: "form-horizontal", role: "form"}) do |f| %>
 
-  <div>
-    <%= form.label :first_name, style: "display: block" %>
-    <%= form.text_field :first_name %>
-  </div>
+    <div class="form-group">
+        <%= f.label :first_name, class: "label" %>
+        <%= f.text_field :first_name, class: "form-control", placeholder: "First Name", autofocus: true %>
+    </div>
 
-  <div>
-    <%= form.label :last_name, style: "display: block" %>
-    <%= form.text_field :last_name %>
-  </div>
+    <div class="form-group">
+        <%= f.label :last_name, class: "label" %>
+        <%= f.text_field :last_name, class: "form-control", placeholder: "Last Name", autofocus: true %>
+    </div>
 
+    <div class="form-group">
+        <%= f.label :username, class: "label" %>
+        <%= f.text_field :username, class: "form-control", placeholder: "Username", autofocus: true %>
+    </div>
 
-  <div>
-    <%= form.label :username, style: "display: block" %>
-    <%= form.text_field :username %>
-  </div>
+    <div class="form-group">
+        <%= f.label :email, class: "email" %>
+        <%= f.email_field :email, class: "form-control", placeholder: "Email", autofocus: true %>
+    </div>
 
-  <div>
-    <%= form.label :email, style: "display: block" %>
-    <%= form.text_field :email %>
-  </div>
+    <div class="form-group">
+        <%= f.label :password, class: "password" %>
+        <%= f.password_field :password, class: "form-control", placeholder: "Password", autofocus: true %>
+    </div>
 
-  <div>
-    <%= form.label :password, style: "display: block" %>
-    <%= form.text_field :password %>
-  </div>
-
-  <div>
-    <%= form.submit "Sign Up", data: { turbo: false } %>
-  </div>
-  
-<% end %>
+    <div class="form-group mt-3 mb-2">
+        <%= f.submit(@user.new_record? ? "Sign Up" : "Update Account",  class: "btn btn-primary btn-sm") %>
+    </div>
+    <% end %>
+    <div class="col-xs-4 col-xs-offset-4">
+        [<%= link_to "Cancel Request and Go Back", articles_path %>]
+    </div>
+</div>
