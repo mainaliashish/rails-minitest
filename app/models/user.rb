@@ -4,6 +4,7 @@ class User < ApplicationRecord
   friendly_id :username, use: :slugged
 
   has_many :articles, dependent: :destroy
+  has_many :categories
 
 	before_save { self.email = email.downcase }
 

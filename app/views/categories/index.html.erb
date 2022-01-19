@@ -1,3 +1,44 @@
 <div class="container mt-4 p-2">
 <%= render partial: 'shared/nav', locals: {heading: 'Categories'} %>
 </div>
+
+
+<% if @categories.count >= 1 %>
+<div class="container">
+  <div class="mb-1">
+	  <%= will_paginate @categories %>  
+  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Created date</th>
+        <th scope="col">Author</th>
+        <th scope="col" class="text-center">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @categories.each do |category| %>
+      <tr>
+        <td><%= category.name %></td>
+        <td><%= time_ago_in_words category.created_at %></td>
+        <td><%= category.user.username %></td>
+        <td class="text-center">
+          <%= link_to "Show", category_path(category), class: "btn btn-primary btn-sm" %>
+          <% if logged_in? and (category.user == session["user_id"] or current_user.admin?) %>
+            <%= link_to "Edit", edit_category_path(category), class: "btn btn-info btn-sm" %>
+            <%= link_to "Delete", category_path(category), data: {
+                        turbo_method: :delete,
+                        turbo_confirm: "Are you sure?"
+                      }, class: "btn btn-danger btn-sm" %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <% else %>
+    <h3>No Categories found.</h3>
+  <% end %>
+</div>
