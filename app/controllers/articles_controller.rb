@@ -5,7 +5,8 @@ class ArticlesController < ApplicationController
   before_action :require_same_user, only: [:edit, :update, :destroy]
 
   def index
-    @articles = Article.includes(:user).all.order(created_at: :desc)
+    # @articles = Article.includes(:user).all.order(created_at: :desc)
+		@articles = Article.includes(:user).paginate(page: params[:page], per_page: 10).order(created_at: :desc)
   end
 
   def new

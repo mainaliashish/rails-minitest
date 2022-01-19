@@ -14,10 +14,12 @@
 </p>
 <% if @articles.count >= 1 %>
 <div class="container">
+  <div class="mb-1">
+	  <%= will_paginate @articles %>  
+  </div>
   <table class="table table-hover">
     <thead>
       <tr>
-        <th scope="col">#</th>
         <th scope="col">Title</th>
         <th scope="col">Content</th>
         <th scope="col">Created date</th>
@@ -28,7 +30,6 @@
     <tbody>
     <% @articles.each_with_index do |article, index| %>
       <tr>
-        <th scope="row"><%= index + 1 %></th>
         <td><%=truncate(article.title, lenght: 200) %></td>
         <td><%= truncate(article.body, lenght: 400) %></td>
         <td><%= time_ago_in_words article.created_at %></td>
@@ -47,6 +48,7 @@
     <% end %>
     </tbody>
   </table>
+
   <% else %>
     <h3>No articles found.</h3>
   <% end %>

@@ -73,10 +73,13 @@ group :test do
 end
 
 # Added by user
-gem "pry", group: :development
-gem "bcrypt"
-gem 'hirb-unicode'
+group :development do
+  gem "pry"
+  gem 'hirb-unicode'
+end
 
+gem "bcrypt"
+gem 'will_paginate', '~> 3.3'
 gem 'cssbundling-rails'
 gem 'faker'
 
