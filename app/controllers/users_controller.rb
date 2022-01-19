@@ -30,12 +30,12 @@ class UsersController < ApplicationController
   end
 
   def update
-		if @user.update(user_params)
-		flash[:info] = "User Was Updated Successfully!"
-		redirect_to user_path(@user)
-		else
-			render :edit
-		end
+    if @user.update(user_params)
+    flash[:info] = "User Was Updated Successfully!"
+    redirect_to user_path(@user)
+    else
+      render :edit
+    end
   end
 
   def destroy

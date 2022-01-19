@@ -1,12 +1,11 @@
 class ArticlesController < ApplicationController
 
   before_action :set_article, only: [:edit, :update, :show, :destroy]
-	before_action :require_user, except: [:index, :show]
+  before_action :require_user, except: [:index, :show]
   before_action :require_same_user, only: [:edit, :update, :destroy]
 
   def index
-    # @articles = Article.includes(:user).all.order(created_at: :desc)
-		@articles = Article.includes(:user).paginate(page: params[:page], per_page: 10).order(created_at: :desc)
+    @articles = Article.includes(:user).paginate(page: params[:page], per_page: 10).order(created_at: :desc)
   end
 
   def new
@@ -14,15 +13,14 @@ class ArticlesController < ApplicationController
   end
 
   def create
-		@article = Article.new(article_params)
+    @article = Article.new(article_params)
     @article.user = current_user
-    # pry.binding
     if @article.save
-			flash[:info] = "Article Was Successfully Created!"
-			redirect_to article_path(@article)
-		else
-			render :new
-		end
+      flash[:info] = "Article Was Successfully Created!"
+      redirect_to article_path(@article)
+    else
+      render :new
+    end
   end
 
   def show
@@ -32,19 +30,18 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    # pry.binding
-		if @article.update(article_params)
-		flash[:info] = "Article Was Updated Successfully!"
-		redirect_to article_path(@article)
-		else
-			render :edit
-		end
+    if @article.update(article_params)
+    flash[:info] = "Article Was Updated Successfully!"
+    redirect_to article_path(@article)
+    else
+      render :edit
+    end
   end
 
   def destroy
-		@article.destroy
-		flash[:danger] = "Article Was Deleted Successfully!"
-		redirect_to articles_path
+    @article.destroy
+    flash[:danger] = "Article Was Deleted Successfully!"
+    redirect_to articles_path
   end
 
   private

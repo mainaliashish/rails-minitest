@@ -6,7 +6,7 @@
 <% if @articles.count >= 1 %>
 <div class="container">
   <div class="mb-1">
-	  <%= will_paginate @articles %>  
+    <%= will_paginate @articles %>  
   </div>
   <table class="table table-hover">
     <thead>
@@ -21,8 +21,8 @@
     <tbody>
     <% @articles.each_with_index do |article, index| %>
       <tr>
-        <td><%=truncate(article.title, lenght: 200) %></td>
-        <td><%= truncate(article.body, lenght: 400) %></td>
+        <td><%= truncate(article.title, length: 30) %></td>
+        <td><%= truncate(article.body, length: 50) %></td>
         <td><%= time_ago_in_words article.created_at %></td>
         <td><%= article.user ? article.user.first_name : ''%></td>
         <td class="text-center">

@@ -1,11 +1,11 @@
 class CategoriesController < ApplicationController
   
   before_action :set_category, only: [:edit, :update, :show, :destroy]
-	before_action :require_user, except: [:index, :show]
+  before_action :require_user, except: [:index, :show]
   before_action :require_admin, only: [:edit, :update, :destroy]
 
   def index
-		@categories = Category.includes(:user).paginate(page: params[:page], per_page: 10).order(created_at: :desc)
+    @categories = Category.includes(:user).paginate(page: params[:page], per_page: 10).order(created_at: :desc)
   end
 
   def new
@@ -13,15 +13,14 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    # pry.binding
     @category = Category.new(category_params)
     @category.user = current_user
     if @category.save
-			flash[:info] = "Category Was Successfully Created!"
-			redirect_to category_path(@category)
-		else
-			render :new
-		end
+      flash[:info] = "Category Was Successfully Created!"
+      redirect_to category_path(@category)
+    else
+      render :new
+    end
   end
 
   def show
@@ -31,18 +30,18 @@ class CategoriesController < ApplicationController
   end
 
   def update
-		if @category.update(category_params)
-		flash[:info] = "Category Was Updated Successfully!"
-		redirect_to categories_path
-		else
-			render :edit
-		end
+    if @category.update(category_params)
+    flash[:info] = "Category Was Updated Successfully!"
+    redirect_to categories_path
+    else
+      render :edit
+    end
   end
 
   def destroy
-		@category.destroy
-		flash[:danger] = "Category Was Deleted Successfully!"
-		redirect_to categories_path
+    @category.destroy
+    flash[:danger] = "Category Was Deleted Successfully!"
+    redirect_to categories_path
   end
 
   private
