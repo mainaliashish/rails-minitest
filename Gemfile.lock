@@ -98,8 +98,14 @@ GEM
       reline (>= 0.2.7)
     digest (3.1.0)
     erubi (1.10.0)
+    faker (2.19.0)
+      i18n (>= 1.6, < 2)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    hirb (0.7.3)
+    hirb-unicode (0.0.5)
+      hirb (~> 0.5)
+      unicode-display_width (~> 0.1.1)
     i18n (1.8.11)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.0.2)
@@ -205,6 +211,7 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
+    unicode-display_width (0.1.1)
     web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -232,6 +239,8 @@ DEPENDENCIES
   capybara
   cssbundling-rails
   debug
+  faker
+  hirb-unicode
   importmap-rails
   jbuilder
   pry

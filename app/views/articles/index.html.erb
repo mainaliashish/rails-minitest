@@ -29,8 +29,8 @@
     <% @articles.each_with_index do |article, index| %>
       <tr>
         <th scope="row"><%= index + 1 %></th>
-        <td><%= article.title %></td>
-        <td><%= article.body %></td>
+        <td><%=truncate(article.title, lenght: 200) %></td>
+        <td><%= truncate(article.body, lenght: 400) %></td>
         <td><%= time_ago_in_words article.created_at %></td>
         <td><%= article.user ? article.user.first_name : ''%></td>
         <td class="text-center">

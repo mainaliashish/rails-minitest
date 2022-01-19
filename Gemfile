@@ -75,8 +75,9 @@ end
 # Added by user
 gem "pry", group: :development
 gem "bcrypt"
+gem 'hirb-unicode'
 
 gem 'cssbundling-rails'
-
+gem 'faker'
 
 

@@ -7,7 +7,41 @@
 #   Character.create(name: "Luke", movie: movies.first)
 # require "bcrypt"
 
-# 10.times do
 
-# end
+require 'faker'
+require 'bcrypt'
+
+User.create(
+  first_name: "Ashish", last_name: "Mainali", 
+  email: "ashish@admin.com", username: "ashish", role: 1,
+  password_digest: BCrypt::Password.create("password")
+)
+puts "Admin user created."
+
+10.times do
+  User.create([{
+    first_name: Faker::Name.first_name, 
+    last_name: Faker::Name.last_name,
+    email: Faker::Internet.unique.email,
+    username: Faker::Internet.username,
+    password_digest: BCrypt::Password.create("password"),
+    role: 0
+  }])
+end
+
+puts "Users created."
+
+users_id = User.pluck(:id)
+# user_id = users_id.sample(1).join.to_i
+i = 0
+50.times do
+  Article.create([{
+    title: Faker::Quote.famous_last_words,
+    body: Faker::Lorem.sentence(word_count: 50),
+    user_id: users_id.sample(1).join.to_i
+  }])
+  puts "Article #{i += 1} created."
+end 
+
+
 
