@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  extend FriendlyId
+  
+  friendly_id :username, use: :slugged
+
   has_many :articles, dependent: :destroy
 
 	before_save { self.email = email.downcase }

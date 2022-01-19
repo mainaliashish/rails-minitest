@@ -79,8 +79,10 @@ group :development do
 end
 
 gem "bcrypt"
-gem 'will_paginate', '~> 3.3'
 gem 'cssbundling-rails'
 gem 'faker'
+gem 'will_paginate', '~> 3.3'
+gem 'friendly_id', '~> 5.4.0'
+
 
 
