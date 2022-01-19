@@ -1,18 +1,30 @@
+<div class="container mt-5 p-3">
+    <h4>Login Your Account</h4>
+    <%= form_with(url: login_path, :html => {class: "form-horizontal", role: "form"}) do |f| %>
 
-<%= form_with(url: login_path) do |form| %>
+    <div class="form-group mb-3">
+        <%= f.label :email, class: "email" %>
+        <%= f.email_field :email, class: "form-control", placeholder: "Email", autofocus: true %>
+    </div>
 
-  <div>
-    <%= form.label :email, style: "display: block" %>
-    <%= form.text_field :email %>
-  </div>
+    <div class="form-group mb-3">
+        <%= f.label :password, class: "password" %>
+        <%= f.password_field :password, class: "form-control", placeholder: "Password", autofocus: true %>
+    </div>
 
-  <div>
-    <%= form.label :password, style: "display: block" %>
-    <%= form.text_field :password %>
-  </div>
+    <div class="form-group mt-3 mb-2">
+        <%= f.submit("Login",  class: "btn btn-primary btn-sm") %>
+    </div>
+    <% end %>
+    <div class="col-xs-4 col-xs-offset-4">
+        [<%= link_to "Cancel Request and Go Back", articles_path %>]
+    </div>
+</div>
 
 
-  <div>
-    <%= form.submit "Login", data: { turbo: false} %>
-  </div>
-<% end %>
+
+
+
+
+
+

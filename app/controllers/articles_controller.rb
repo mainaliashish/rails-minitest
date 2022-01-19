@@ -6,7 +6,6 @@ class ArticlesController < ApplicationController
 
   def index
     @articles = Article.includes(:user).all.order(created_at: :desc)
-    # pry.binding
   end
 
   def new
