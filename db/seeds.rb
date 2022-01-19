@@ -17,7 +17,11 @@ User.create(
   email: "ashish@admin.com", username: "ashish", role: 1,
   password_digest: BCrypt::Password.create("password")
 )
+puts "Creating users..."
+sleep(5)
+puts "-" * 40
 puts "Admin user created."
+puts "-" * 40
 
 10.times do
   User.create([{
@@ -32,6 +36,7 @@ puts "Admin user created."
 end
 
 puts "Users created."
+puts "-" * 40
 
 users_id = User.pluck(:id)
 # user_id = users_id.sample(1).join.to_i
@@ -43,8 +48,12 @@ i = 0
     body: Faker::Lorem.sentence(word_count: 50),
     user_id: users_id.sample(1).join.to_i
   }])
-  puts "Article #{i += 1} created."
+  i += 1
+  puts "Article 1-20 created." if i == 20
+  puts "Article 21-30 created." if i == 30
+  puts "Article 31-50 created." if i == 50
 end 
 
+puts "-" * 40
 
 
