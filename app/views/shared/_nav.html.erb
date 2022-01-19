@@ -1,0 +1,14 @@
+<h1>List All <%= heading %></h1>
+<%= link_to "Create New Article", new_article_path, class: "btn btn-info btn-sm" %> 
+<%= link_to "Create New category", new_category_path, class: "btn btn-primary btn-sm" %> 
+
+<span class="float-end">
+  <%= link_to "All users", users_path, class: "btn btn-warning btn-sm" %> 
+  <% if logged_in? %>
+    <%= link_to "Log out", logout_path, data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" %>
+  <% else %>
+    <%= link_to "Login", login_path, class: "btn btn-primary btn-sm" %> 
+    <%= link_to "Signup", signup_path, class: "btn btn-info btn-sm" %>
+  <% end %>
+</span>
+

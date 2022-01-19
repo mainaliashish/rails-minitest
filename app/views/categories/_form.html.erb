@@ -1,0 +1,20 @@
+<%= render 'shared/errors', obj: @category %>
+
+<div class="container mt-5 p-3">
+  <h4><%= title %></h4>
+</div>
+
+<div class="container">
+    <%= form_with(model: @category, :html => {class: "form-horizontal", role: "form"}) do |f| %>
+    <div class="form-group mb-3">
+        <%= f.text_field :name, class: "form-control", placeholder: "insert category name", autofocus: true %>
+    </div>
+
+    <div class="form-group mb-3">
+        <%= f.submit data: { turbo: false },  class: "btn btn-primary btn-sm" %>
+    </div>
+    <% end %>
+    <div class="col-xs-4 col-xs-offset-4">
+        [<%= link_to "Cancel Request and Go Back", articles_path %>]
+    </div>
+</div>

@@ -1,17 +1,8 @@
-
 <div class="container mt-4 p-2">
-<h1>List All Articles</h1>
-<%= link_to "Create New Article", new_article_path, class: "btn btn-primary btn-sm" %> 
-<%= link_to "All users", users_path, class: "btn btn-warning btn-sm" %> 
-<% if logged_in? %>
-  <%= link_to "Log out", logout_path, data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger btn-sm" %>
-<% else %>
-  <%= link_to "Login", login_path, class: "btn btn-primary btn-sm" %> 
-  <%= link_to "Signup", signup_path, class: "btn btn-info btn-sm" %>
-<% end %>
+  <%= render partial: 'shared/nav', locals: {heading: 'Articles'} %>
 </div>
-
 </p>
+
 <% if @articles.count >= 1 %>
 <div class="container">
   <div class="mb-1">

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root 'articles#index'
   get 'pages/about'
   get 'pages/contact'
-  # resources :articles
+  resources :categories
   get 'articles', to: 'articles#index'
   post 'articles', to: 'articles#create'
   get 'articles/new', to: 'articles#new', as: 'new_article'
