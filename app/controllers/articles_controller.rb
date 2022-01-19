@@ -16,6 +16,7 @@ class ArticlesController < ApplicationController
   def create
 		@article = Article.new(article_params)
     @article.user = current_user
+    # pry.binding
     if @article.save
 			flash[:info] = "Article Was Successfully Created!"
 			redirect_to article_path(@article)
@@ -31,6 +32,7 @@ class ArticlesController < ApplicationController
   end
 
   def update
+    # pry.binding
 		if @article.update(article_params)
 		flash[:info] = "Article Was Updated Successfully!"
 		redirect_to article_path(@article)
@@ -51,7 +53,7 @@ class ArticlesController < ApplicationController
   end
 
   def article_params
-    params.require(:article).permit(:title, :body)
+    params.require(:article).permit(:title, :body, category_ids: [])
   end
 
   def require_same_user

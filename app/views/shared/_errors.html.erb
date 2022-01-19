@@ -1,9 +1,9 @@
 <% if obj.errors.any? %>
-<% obj.errors.full_messages.each do |msg| %>
-<div class="container">
-    <div class="alert alert-danger" role="alert">
-        <strong><%= msg %></strong>
+    <% obj.errors.full_messages.each do |msg| %>
+    <div class="container-fluid">
+        <div class="alert alert-danger" role="alert">
+            <strong><%= msg %></strong>
+        </div>
     </div>
-</div>
-<% end %>
+    <% end %>
 <% end %>
