@@ -1,3 +1,3 @@
 module SessionsHelper
-  puts "Hello"
+  puts 'Hello'
 end

@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
+# this will handle operations related to categories.
 class CategoriesController < ApplicationController
-  
-  before_action :set_category, only: [:edit, :update, :show, :destroy]
-  before_action :require_user, except: [:index, :show]
-  before_action :require_admin, only: [:edit, :update, :destroy]
+  before_action :set_category, only: %i[edit update show destroy]
+  before_action :require_user, except: %i[index show]
+  before_action :require_admin, only: %i[edit update destroy]
 
   def index
     @categories = Category.includes(:user).paginate(page: params[:page], per_page: 10).order(created_at: :desc)
@@ -16,23 +18,21 @@ class CategoriesController < ApplicationController
     @category = Category.new(category_params)
     @category.user = current_user
     if @category.save
-      flash[:info] = "Category Was Successfully Created!"
+      flash[:info] = 'Category Was Successfully Created!'
       redirect_to category_path(@category)
     else
       render :new
     end
   end
 
-  def show
-  end
+  def show; end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @category.update(category_params)
-    flash[:info] = "Category Was Updated Successfully!"
-    redirect_to categories_path
+      flash[:info] = 'Category Was Updated Successfully!'
+      redirect_to categories_path
     else
       render :edit
     end
@@ -40,7 +40,7 @@ class CategoriesController < ApplicationController
 
   def destroy
     @category.destroy
-    flash[:danger] = "Category Was Deleted Successfully!"
+    flash[:danger] = 'Category Was Deleted Successfully!'
     redirect_to categories_path
   end
 
@@ -55,10 +55,7 @@ class CategoriesController < ApplicationController
   end
 
   def require_admin
-    if !current_user.admin?
-      flash[:notice] = "You can not perform this actions on categories."
-      redirect_to root_path
-    end
+    flash[:notice] = 'You can only perform operations on you articles.'
+    redirect_to root_path unless current_user == @article.user && current_user.admin?
   end
-
 end
