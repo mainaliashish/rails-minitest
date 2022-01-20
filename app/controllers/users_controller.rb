@@ -55,12 +55,16 @@ class UsersController < ApplicationController
   end
 
   def require_admin
+    return if @user.admin?
+
     flash[:notice] = 'Only admin can perform this action.'
-    redirect_to users_path unless @user.admin?
+    redirect_to users_path
   end
 
   def require_same_user
-    flash[:notice] = 'You can only update your own profile.'
-    redirect_to root_path unless @user == current_user && current_user.admin?
+    return if current_user == @article.user && current_user.admin?
+
+    flash[:notice] = 'You can only perform operations on you articles.'
+    redirect_to root_path
   end
 end
