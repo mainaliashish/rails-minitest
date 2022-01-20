@@ -1,6 +1,3 @@
-# frozen_string_literal: true
-
-# this will handle operations related to articles.
 class ArticlesController < ApplicationController
   before_action :set_article, only: %i[edit update show destroy]
   before_action :require_user, except: %i[index show]

@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       redirect_to root_path
     else
       flash.now[:danger] = 'Error : There was something wrong with your login information.'
-      render 'new'
+      render :new
     end
   end
 
