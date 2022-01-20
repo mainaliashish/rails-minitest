@@ -28,8 +28,13 @@
         <%= f.password_field :password, class: "form-control", placeholder: "Password", autofocus: true %>
     </div>
 
+    <div class="form-group">
+        <%= f.label :password_confirmation, class: "password" %>
+        <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Confirm Password", autofocus: true %>
+    </div>
+
     <div class="form-group mt-3 mb-2">
-        <%= f.submit(@user.new_record? ? "Sign Up" : "Update Account",  class: "btn btn-primary btn-sm") %>
+        <%= f.submit data: { turbo: false },  class: "btn btn-primary btn-sm" %>
     </div>
     <% end %>
     <div class="col-xs-4 col-xs-offset-4">

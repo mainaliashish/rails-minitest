@@ -13,8 +13,9 @@ class User < ApplicationRecord
 
   enum role: { user: 0, admin: 1 }
 
-  validates_presence_of :first_name, :last_name, :email, :username
-  validates_uniqueness_of :email, :username, on: :create, message: 'must be unique'
+  validates :first_name, :last_name, :email, :username, presence: true
+  validates :email, :username, uniqueness: true
 
-  has_secure_password
+  has_secure_password(:password, validations: true)
+  validates :password, confirmation: true
 end
