@@ -53,7 +53,7 @@ class ArticlesController < ApplicationController
   end
 
   def require_same_user
-    return if current_user == @article.user && current_user.admin?
+    return if current_user == @article.user || current_user.admin?
 
     flash[:notice] = 'You can only perform operations on you articles.'
     redirect_to root_path
