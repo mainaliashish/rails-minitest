@@ -6,14 +6,7 @@ class ArticleMailer < ApplicationMailer
   #
   def article_created
     @article = params[:article]
-    image_path = 'app/assets/images/emails/random.jpg'
-    attachments['random.jpg'] = File.read(image_path)
-
-    mail(
-      to: email_address_with_name(User.first.email, User.first.first_name),
-      cc: User.all.pluck(:email, :first_name).map { |email, name| email_address_with_name(email, name) },
-      bcc: 'admin@admin.com',
-      subject: 'New Article was created'
-    )
+    mail to: @article.user.email,
+         subject: 'Your New Article was created'
   end
 end

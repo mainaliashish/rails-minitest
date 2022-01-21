@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'App Admin <rails-app@admin.com>'
+  default from: 'support@railsapp.com'
   layout 'mailer'
 end
