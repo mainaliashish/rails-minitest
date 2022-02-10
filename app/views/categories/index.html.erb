@@ -22,7 +22,7 @@
       <tr>
         <td><%= category.name %></td>
         <td><%= time_ago_in_words category.created_at %></td>
-        <td><%= category.user.username %></td>
+        <td><%= category.user&.username %></td>
         <td class="text-center">
           <%= link_to "Show", category_path(category), class: "btn btn-primary btn-sm" %>
           <% if logged_in? and (category.user == session["user_id"] or current_user.admin?) %>
