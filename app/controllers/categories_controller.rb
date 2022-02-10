@@ -7,7 +7,10 @@ class CategoriesController < ApplicationController
   before_action :require_admin, only: %i[edit update destroy]
 
   def index
-    @categories = Category.includes(:user).paginate(page: params[:page], per_page: 10).order(created_at: :desc)
+    @categories = Category
+                  .includes(:user)
+                  .paginate(page: params[:page], per_page: 10)
+                  .order(created_at: :desc)
   end
 
   def new
