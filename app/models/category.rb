@@ -8,7 +8,7 @@ class Category < ApplicationRecord
 
   has_many :article_categories
   has_many :articles, through: :article_categories
-  belongs_to :user
+  belongs_to :user, optional: true
 
-  validates_presence_of :name, on: %i[create update], message: "can't be blank"
+  validates :name, presence: true, uniqueness: true, length: { minimum: 4, maximum: 30 }
 end
