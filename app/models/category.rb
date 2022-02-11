@@ -10,5 +10,5 @@ class Category < ApplicationRecord
   has_many :articles, through: :article_categories
   belongs_to :user, optional: true
 
-  validates :name, presence: true, uniqueness: true, length: { minimum: 4, maximum: 30 }
+  validates :name, presence: true, uniqueness: true, length: { minimum: 4, maximum: 30 }, on: %i[create update]
 end

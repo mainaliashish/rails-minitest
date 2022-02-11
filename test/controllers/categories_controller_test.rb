@@ -29,7 +29,7 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to categories_path
   end
 
-  test 'should be able to get edit page if admin' do
+  test 'should be able to get edit category if admin' do
     log_in_as(@user, 'password')
     get edit_category_path(@category)
     assert_response :success
@@ -40,13 +40,17 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
     assert_response :redirect
   end
 
-  # Error handling update action, Need to check
-  #     test 'should be able to update category if admin' do
-  #       log_in_as(@user, 'password')
-  #       patch category_url(@category), params: { category: { name: 'Health' }, method: :patch }
-  #       assert_equal @category.name, 'Health'
-  #       # assert_response :success
-  #     end
+  test 'should be able to update category if admin' do
+    log_in_as(@user, 'password')
+    patch category_url(@category), params: { category: { name: 'Health' }, method: :patch }
+    assert_response :redirect
+  end
+
+  test 'should not be able to update empty category if admin' do
+    log_in_as(@user, 'password')
+    patch category_url(@category), params: { category: { name: 'Health' }, method: :patch }
+    assert_response :redirect
+  end
 
   test 'should not be able to delete category if not admin' do
     assert_no_difference 'Category.count' do
@@ -58,6 +62,6 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
   test 'admin should be able to delete category' do
     log_in_as(@user, 'password')
     delete category_path(@category), params: { method: :delete }
-    assert_response :success
+    assert_response :see_other
   end
 end

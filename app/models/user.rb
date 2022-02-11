@@ -17,7 +17,7 @@ class User < ApplicationRecord
   enum role: { user: 0, admin: 1 }
 
   validates :first_name, :last_name, :email, :username, presence: true, length: { minimum: 2, maximum: 30 }
-  validates :email, :username, uniqueness: true
+  validates :email, :username, uniqueness: true, on: %i[create update]
 
   has_secure_password
   validates :password, confirmation: true, on: :create, length: { in: 5..20 }

@@ -36,14 +36,14 @@ class CategoriesController < ApplicationController
       flash[:info] = 'Category Was Updated Successfully!'
       redirect_to categories_path
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @category.destroy
     flash[:danger] = 'Category Was Deleted Successfully!'
-    redirect_to categories_path, status: :ok
+    redirect_to categories_path, status: :see_other
   end
 
   private
