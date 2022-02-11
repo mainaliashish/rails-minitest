@@ -6,7 +6,7 @@ john:
   last_name: "Doe"
   username: "johndoe"
   password_digest: <%= BCrypt::Password.create('password') %>
-  role: "user"
+  role: "admin"
   slug: "john-doe"
 
 hari:

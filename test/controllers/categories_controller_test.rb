@@ -2,9 +2,8 @@ require 'test_helper'
 
 class CategoriesControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @category = Category.last
-    @user = User.last
-    log_in_as(@user, password: 'password')
+    @category = categories(:sports)
+    @user = users(:john)
   end
 
   test 'should get categories index' do
@@ -12,13 +11,53 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'should get new' do
+  test 'should get new if user is an admin' do
+    log_in_as(@user, 'password')
     get new_category_path
     assert_response :success
   end
 
   test 'should get show' do
     get category_path(@category)
+    assert_response :success
+  end
+
+  test 'should redirect create when admin not logged in' do
+    assert_no_difference 'Category.count' do
+      post categories_path, params: { category: { name: 'Health' } }
+    end
+    assert_redirected_to categories_path
+  end
+
+  test 'should be able to get edit page if admin' do
+    log_in_as(@user, 'password')
+    get edit_category_path(@category)
+    assert_response :success
+  end
+
+  test 'should not be able to update category if not admin' do
+    patch category_path(@category), params: { category: { name: 'Health' }, method: :patch }
+    assert_response :redirect
+  end
+
+  # Error handling update action, Need to check
+  #     test 'should be able to update category if admin' do
+  #       log_in_as(@user, 'password')
+  #       patch category_url(@category), params: { category: { name: 'Health' }, method: :patch }
+  #       assert_equal @category.name, 'Health'
+  #       # assert_response :success
+  #     end
+
+  test 'should not be able to delete category if not admin' do
+    assert_no_difference 'Category.count' do
+      delete category_path(@category)
+    end
+    assert_redirected_to categories_path
+  end
+
+  test 'admin should be able to delete category' do
+    log_in_as(@user, 'password')
+    delete category_path(@category), params: { method: :delete }
     assert_response :success
   end
 end

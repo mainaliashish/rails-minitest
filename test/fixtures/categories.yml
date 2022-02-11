@@ -4,10 +4,13 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-# one:
-#   name: MyString
-#   slug: MyString
-#   user_id: MyString
 
-# two: {}
-# # column: value
+technology:
+  name: "Technology"
+  slug: "technology"
+  user_id: 1
+
+sports:
+  name: "Sports"
+  slug: "sports"
+  user_id: 1

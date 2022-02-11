@@ -3,8 +3,7 @@
 # this will handle operations related to categories.
 class CategoriesController < ApplicationController
   before_action :set_category, only: %i[edit update show destroy]
-  before_action :require_user, except: %i[index show]
-  before_action :require_admin, only: %i[edit update destroy]
+  before_action :require_admin, except: %i[index show]
 
   def index
     @categories = Category
@@ -44,7 +43,7 @@ class CategoriesController < ApplicationController
   def destroy
     @category.destroy
     flash[:danger] = 'Category Was Deleted Successfully!'
-    redirect_to categories_path
+    redirect_to categories_path, status: :ok
   end
 
   private
@@ -58,9 +57,9 @@ class CategoriesController < ApplicationController
   end
 
   def require_admin
-    return if current_user.admin?
+    return if logged_in? && current_user.admin?
 
-    flash[:notice] = 'You can not perform this action.'
-    redirect_to root_path
+    flash[:danger] = 'Only admin can perform this action.'
+    redirect_to categories_path
   end
 end
