@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   resources :users
-  root 'pages#index'
+  root 'articles#index'
   get 'pages/about'
   get 'pages/contact'
-  # resources :articles
+  resources :categories
   get 'articles', to: 'articles#index'
   post 'articles', to: 'articles#create'
   get 'articles/new', to: 'articles#new', as: 'new_article'
@@ -12,4 +12,9 @@ Rails.application.routes.draw do
   put 'articles/:id', to: 'articles#update'
   patch 'articles/:id', to: 'articles#update'
   delete 'articles/:id', to: 'articles#destroy'
+
+  get 'signup', 		to: 'users#new'
+  get 'login',  		to: 'sessions#new'
+  post 'login', 		to: 'sessions#create'
+  delete 'logout',	to: 'sessions#destroy'
 end

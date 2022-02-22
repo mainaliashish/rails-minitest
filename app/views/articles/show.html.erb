@@ -1,9 +1,20 @@
-<h1>Show Article by ID</h1>
+<div class="container mt-4 p-4">
+  <h1>Show Article</h1>
 
-<h3>Title : </h3>
-<p><%= @article.title %></p>
+  <h3>Title : </h3>
+  <p><%= @article.title %></p>
 
-<h3>Description : </h3>
-<p><%= @article.body %></p>
+  <h3>Description : </h3>
+  <p><%= @article.body %></p>
 
-<%= link_to "All articles", articles_path %>
+  <% if @article.categories.any? %>
+  <p> <h3>Categories : </h3>
+  <% @article.categories.each do |category| %>
+    <li><%= category.name %></li>
+  <% end %>
+  </p>
+  <% end %>
+
+  <%= link_to "All articles", articles_path, class: "btn btn-primary btn-sm" %>
+
+</div>
